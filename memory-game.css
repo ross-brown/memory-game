@@ -7,6 +7,10 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   text-align: center;
   font-family: 'Comfortaa';
   background-repeat: no-repeat;
@@ -129,4 +133,16 @@ button:hover:enabled {
   button {
     font-size: 1.5rem;
   }
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  background-color: #226987;
+}
+
+.social-icon {
+  color:#3F97BD;
+  margin-left: 0.5rem;
 }
