@@ -9,10 +9,25 @@
 body {
   text-align: center;
   font-family: 'Comfortaa';
-  background-image: url(./assets/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg);
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
+  background-image: linear-gradient(
+  315deg,
+  hsl(198deg 60% 33%) 0%,
+  hsl(198deg 58% 36%) 5%,
+  hsl(198deg 56% 38%) 12%,
+  hsl(198deg 54% 41%) 19%,
+  hsl(198deg 53% 43%) 28%,
+  hsl(198deg 52% 46%) 37%,
+  hsl(198deg 50% 48%) 47%,
+  hsl(198deg 48% 53%) 58%,
+  hsl(196deg 47% 60%) 67%,
+  hsl(194deg 46% 67%) 77%,
+  hsl(191deg 46% 74%) 85%,
+  hsl(188deg 46% 81%) 91%,
+  hsl(184deg 51% 89%) 96%,
+  hsl(180deg 100% 97%) 100%
+);
   min-height: 100vh;
 }
 
@@ -38,6 +53,7 @@ div.score span {
 main {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -64,23 +80,25 @@ button:hover:enabled {
 
 
 #game {
-  height: 70vh;
-  width: 45%;
-  display: grid;
-  gap: 10px;
-  place-items: center;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  justify-items: center;
-  margin: 2rem;
+  height: 45rem;
+  width: 45rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: auto;
 }
 
 
 .card {
   border: 3px solid #226987;
-  width: 100%;
-  height: 100%;
+  width: 20%;
+  height: 30%;
   margin: 5px;
+  border-radius: 5%;
+  position: relative;
   display: inline-block;
   opacity: 0.25;
   background-color: grey;
@@ -92,4 +110,18 @@ button:hover:enabled {
 
 .swal-overlay {
   background-color: rgba(131, 185, 221, 0.7);
+}
+
+
+
+@media only screen and (max-width: 725px) {
+header {
+  font-size: 1.5rem;
+}
+
+
+  #game {
+    width: 30rem;
+    height: 30rem;
+  }
 }
