@@ -43,8 +43,9 @@ function shuffle(items) {
 
 function addRandomColors(array) {
   for (let i = 0; i < 6; i++) {
-    let randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    array.push(randomColor, randomColor);
+    let num = (Math.random() * 0xfffff * 1000000).toString(16);
+    let hexCode = '#' + num.slice(0, 6);
+    array.push(hexCode, hexCode);
   }
 }
 
@@ -61,7 +62,6 @@ function createCards(colors) {
   for (let color of colors) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add(color, 'card');
-    cardDiv.addEventListener('click', handleCardClick);
     gameBoard.appendChild(cardDiv);
   }
 }
@@ -126,6 +126,7 @@ function startGame() {
   cards.forEach(card => {
     card.style.backgroundColor = '#F0FFFF';
     card.style.opacity = 1;
+    card.addEventListener('click', handleCardClick);
   });
   startBtn.disabled = true;
   resetBtn.disabled = false;
@@ -136,6 +137,7 @@ function resetGame() {
   cards.forEach(card => {
     card.style.backgroundColor = 'grey';
     card.style.opacity = 0.25;
+    card.removeEventListener('click', handleCardClick);
   });
   reorderCards();
   startBtn.disabled = false;
