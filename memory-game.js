@@ -2,15 +2,18 @@
 
 /** Memory game: find matching pairs of cards and flip both of them. */
 
-let lockBoard = true;
+let boardLocked = true;
 let firstCard;
 let secondCard;
+let matches = 0;
+let guesses = 0;
 const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
+const guessCount = document.querySelector('#guess-count');
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
-  "red", "blue", "green", "orange", "purple",
-  "red", "blue", "green", "orange", "purple",
+  "red", "blue", "green", "orange", "purple", "yellow",
+  "red", "blue", "green", "orange", "purple", "yellow"
 ];
 
 const colors = shuffle(COLORS);
@@ -70,13 +73,17 @@ function unFlipCard(card) {
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  if (lockBoard) return;
+  if (boardLocked) return;
   if (evt.target === firstCard) return;
   if (firstCard) {
     secondCard = evt.target;
     flipCard(secondCard);
-    lockBoard = true;
+    boardLocked = true;
     if (cardsAreMatch(firstCard, secondCard)) {
+      matches++;
+      if (matches === cards.length / 2) {
+        alert(`Nice work! You got it in ${guesses + 1} guesses!`)
+      }
       resetCardsAndUnlockBoard();
     } else {
       setTimeout(() => {
@@ -85,6 +92,7 @@ function handleCardClick(evt) {
         resetCardsAndUnlockBoard();
       }, FOUND_MATCH_WAIT_MSECS);
     }
+    guessCount.innerText = String(++guesses);
   } else {
     firstCard = evt.target;
     flipCard(firstCard);
@@ -94,7 +102,7 @@ function handleCardClick(evt) {
 function resetCardsAndUnlockBoard() {
   firstCard = undefined;
   secondCard = undefined;
-  lockBoard = false;
+  boardLocked = false;
 }
 
 function cardsAreMatch(card1, card2) {
@@ -102,7 +110,7 @@ function cardsAreMatch(card1, card2) {
 }
 
 function startGame() {
-  lockBoard = false;
+  boardLocked = false;
   cards.forEach(card => {
     card.style.backgroundColor = 'white';
     card.style.opacity = 1;
@@ -112,7 +120,7 @@ function startGame() {
 }
 
 function resetGame() {
-  lockBoard = true;
+  boardLocked = true;
   cards.forEach(card => {
     card.style.backgroundColor = 'grey';
     card.style.opacity = 0.1;

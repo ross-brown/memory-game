@@ -8,13 +8,18 @@
 
 body {
   text-align: center;
+  font-family: 'Comfortaa';
   background-image: url(./assets/brady-corps-ellyLSXQ5wg-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 
 header {
   text-align: center;
   color: white;
+  padding-top: 1rem;
 }
 
 main {
@@ -23,9 +28,18 @@ main {
   flex-direction: column;
 }
 
+button {
+  font-family: inherit;
+  font-size: 1.5rem;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
 
 #game {
-  height: 80vh;
+  height: 70vh;
   width: 45%;
   display: grid;
   gap: 10px;
@@ -47,10 +61,14 @@ main {
   background-color: grey;
 }
 
-/* #start-btn {
+.buttons {
+  padding-bottom: 1rem;
+}
+
+#start-btn {
 
 }
 
 #reset-btn {
 
-} */
+}
