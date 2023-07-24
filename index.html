@@ -4,6 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Memory Game!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="memory-game.css" />
 </head>
 
@@ -14,7 +18,10 @@
 
   <main>
     <div id="game"></div>
-    <button id="start-btn">Start Game</button>
+    <div class="buttons">
+      <button id="start-btn">Start Game</button>
+      <button id="reset-btn" disabled>Reset Game</button>
+    </div>
   </main>
 
   <script src="memory-game.js"></script>

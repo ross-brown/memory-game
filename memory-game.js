@@ -6,6 +6,7 @@ let lockBoard = true;
 let firstCard;
 let secondCard;
 const startBtn = document.querySelector('#start-btn');
+const resetBtn = document.querySelector('#reset-btn');
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
   "red", "blue", "green", "orange", "purple",
@@ -16,6 +17,7 @@ const colors = shuffle(COLORS);
 
 createCards(colors);
 
+const cards = document.querySelectorAll('.card');
 
 /** Shuffle array items in-place and return shuffled array. */
 
@@ -47,7 +49,7 @@ function createCards(colors) {
 
   for (let color of colors) {
     const cardDiv = document.createElement('div');
-    cardDiv.classList.add(color);
+    cardDiv.classList.add(color, 'card');
     cardDiv.addEventListener('click', handleCardClick);
     gameBoard.appendChild(cardDiv);
   }
@@ -99,7 +101,26 @@ function cardsAreMatch(card1, card2) {
   return card1.classList[0] === card2.classList[0];
 }
 
-
-startBtn.addEventListener('click', () => {
+function startGame() {
   lockBoard = false;
-})
+  cards.forEach(card => {
+    card.style.backgroundColor = 'white';
+    card.style.opacity = 1;
+  });
+  startBtn.disabled = true;
+  resetBtn.disabled = false;
+}
+
+function resetGame() {
+  lockBoard = true;
+  cards.forEach(card => {
+    card.style.backgroundColor = 'grey';
+    card.style.opacity = 0.1;
+  });
+  startBtn.disabled = false;
+  resetBtn.disabled = true;
+}
+
+
+startBtn.addEventListener('click', startGame);
+resetBtn.addEventListener('click', resetGame);
