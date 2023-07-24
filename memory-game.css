@@ -103,6 +103,7 @@ button:hover:enabled {
   opacity: 0.25;
   background-color: grey;
   transition: background-color 200ms;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .buttons {

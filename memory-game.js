@@ -12,10 +12,9 @@ const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const FOUND_MATCH_WAIT_MSECS = 1000;
-const COLORS = [
-  "red", "red", "orange", "orange", "yellow", "purple",
-  "yellow", "blue", "blue", "green", "green", "purple"
-];
+const COLORS = [];
+
+addRandomColors(COLORS);
 
 const colors = shuffle(COLORS);
 
@@ -39,6 +38,14 @@ function shuffle(items) {
   }
 
   return items;
+}
+
+
+function addRandomColors(array) {
+  for (let i = 0; i < 6; i++) {
+    let randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    array.push(randomColor, randomColor);
+  }
 }
 
 /** Create card for every color in colors (each will appear twice)
@@ -130,6 +137,7 @@ function resetGame() {
     card.style.backgroundColor = 'grey';
     card.style.opacity = 0.25;
   });
+  reorderCards();
   startBtn.disabled = false;
   resetBtn.disabled = true;
   matches = 0;
@@ -137,6 +145,14 @@ function resetGame() {
   guessCount.innerText = 0;
   clearTimeout(currentTimout);
 }
+
+function reorderCards() {
+  cards.forEach(card => {
+    const randomOrder = Math.floor(Math.random() * 12);
+    card.style.order = randomOrder;
+  });
+}
+
 
 
 startBtn.addEventListener('click', startGame);
