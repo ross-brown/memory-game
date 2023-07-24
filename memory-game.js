@@ -12,7 +12,8 @@ const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
-  "red", "red"
+  "red", "red", "orange", "orange", "yellow", "purple",
+  "yellow", "blue", "blue", "green", "green", "purple"
 ];
 
 const colors = shuffle(COLORS);
@@ -66,7 +67,7 @@ function flipCard(card) {
 /** Flip a card face-down. */
 
 function unFlipCard(card) {
-  card.style.backgroundColor = 'white';
+  card.style.backgroundColor = '#F0FFFF';
 }
 
 /** Handle clicking on a card: this could be first-card or second-card. */
@@ -115,7 +116,7 @@ function cardsAreMatch(card1, card2) {
 function startGame() {
   boardLocked = false;
   cards.forEach(card => {
-    card.style.backgroundColor = 'white';
+    card.style.backgroundColor = '#F0FFFF';
     card.style.opacity = 1;
   });
   startBtn.disabled = true;
@@ -126,12 +127,13 @@ function resetGame() {
   boardLocked = true;
   cards.forEach(card => {
     card.style.backgroundColor = 'grey';
-    card.style.opacity = 0.1;
+    card.style.opacity = 0.25;
   });
   startBtn.disabled = false;
   resetBtn.disabled = true;
   matches = 0;
   guesses = 0;
+  guessCount.innerText = 0;
 }
 
 
