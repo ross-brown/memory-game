@@ -12,8 +12,7 @@ const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [
-  "red", "blue", "green", "orange", "purple", "yellow",
-  "red", "blue", "green", "orange", "purple", "yellow"
+  "red", "red"
 ];
 
 const colors = shuffle(COLORS);
@@ -82,7 +81,11 @@ function handleCardClick(evt) {
     if (cardsAreMatch(firstCard, secondCard)) {
       matches++;
       if (matches === cards.length / 2) {
-        alert(`Nice work! You got it in ${guesses + 1} guesses!`)
+        swal({
+          title: 'Nice work!',
+          text: `You got it in ${guesses + 1} guesses!`,
+          icon: 'success'
+        });
       }
       resetCardsAndUnlockBoard();
     } else {
@@ -127,6 +130,8 @@ function resetGame() {
   });
   startBtn.disabled = false;
   resetBtn.disabled = true;
+  matches = 0;
+  guesses = 0;
 }
 
 

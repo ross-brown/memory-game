@@ -9,17 +9,19 @@
 body {
   text-align: center;
   font-family: 'Comfortaa';
-  background-image: url(./assets/brady-corps-ellyLSXQ5wg-unsplash.jpg);
+  background-image: url(./assets/yuriy-kovalev-nN1HSDtKdlw-unsplash.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  min-height: 100vh;
 }
 
 
 header {
   text-align: center;
-  color: white;
+  color: #F0FFFF;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 main {
@@ -32,9 +34,21 @@ button {
   font-family: inherit;
   font-size: 1.5rem;
   border: none;
+  background-color: #F0FFFF;
+  color: #226987;
   padding: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: all 300ms;
+}
+
+button:disabled {
+  opacity: 0.25;
+}
+
+button:hover:enabled {
+  background-color: #3F97BD;
+  color: #F0FFFF
 }
 
 
@@ -65,10 +79,6 @@ button {
   padding-bottom: 1rem;
 }
 
-#start-btn {
-
-}
-
-#reset-btn {
-
+.swal-overlay {
+  background-color: rgba(131, 185, 221, 0.7);
 }
