@@ -92,13 +92,14 @@ function handleCardClick(evt) {
     guesses++;
     if (cardsAreMatch(firstCard, secondCard)) {
       matches++;
-      if (matches === cards.length / 2) {
+      if (matches === cards.length / 2) { //if all cards matched
         swal({
           title: 'Nice work!',
           text: `You got it in ${guesses} guesses!`,
           icon: 'success'
         });
         updateLocalStorage(guesses);
+        resetBtn.disabled = false;
       }
       resetCardsAndUnlockBoard();
     } else { //if cards don't match
@@ -133,7 +134,6 @@ function startGame() {
     card.addEventListener('click', handleCardClick);
   });
   startBtn.disabled = true;
-  resetBtn.disabled = false;
 }
 
 function resetGame() {
