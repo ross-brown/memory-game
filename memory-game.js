@@ -12,10 +12,12 @@ const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const lowScore = document.querySelector("#low-score");
+const selectDropdown = document.querySelector('.card-dropdown');
+const gameBoard = document.getElementById("game");
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [];
 
-addRandomColors(COLORS);
+addRandomColors(COLORS, 12);
 
 const colors = shuffle(COLORS);
 
@@ -23,7 +25,7 @@ createCards(colors);
 
 updateLowScore();
 
-const cards = document.querySelectorAll('.card');
+let cards = document.querySelectorAll('.card');
 
 /** Shuffle array items in-place and return shuffled array. */
 
@@ -43,9 +45,23 @@ function shuffle(items) {
   return items;
 }
 
+function changeCardAmount(evt) {
+  while (gameBoard.firstChild) {
+    gameBoard.removeChild(gameBoard.firstChild);
+  }
 
-function addRandomColors(array) {
-  for (let i = 0; i < 6; i++) {
+  COLORS.length = 0;
+  const cardAmount = Number(evt.target.value);
+
+  addRandomColors(COLORS, cardAmount);
+  shuffle(COLORS);
+  createCards(COLORS);
+  cards = document.querySelectorAll('.card');
+}
+
+
+function addRandomColors(array, cardAmount) {
+  for (let i = 0; i < cardAmount / 2; i++) {
     let num = (Math.random() * 0xfffff * 1000000).toString(16);
     let hexCode = '#' + num.slice(0, 6);
     array.push(hexCode, hexCode);
@@ -134,6 +150,7 @@ function startGame() {
     card.addEventListener('click', handleCardClick);
   });
   startBtn.disabled = true;
+  selectDropdown.disabled = true;
 }
 
 function resetGame() {
@@ -146,6 +163,7 @@ function resetGame() {
   reorderCards();
   startBtn.disabled = false;
   resetBtn.disabled = true;
+  selectDropdown.disabled = false;
   matches = 0;
   guesses = 0;
   guessCount.innerText = 0;
@@ -180,3 +198,4 @@ function updateLowScore() {
 
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
+selectDropdown.addEventListener('change', changeCardAmount);
