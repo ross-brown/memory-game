@@ -10,6 +10,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   text-align: center;
   font-family: 'Comfortaa';
@@ -116,6 +117,17 @@ button:hover:enabled {
 
 .swal-overlay {
   background-color: rgba(131, 185, 221, 0.7);
+}
+
+.scoreboard {
+  color: #F0FFFF;
+  height: 12rem;
+  width: 40rem;
+  padding-top: 3rem;
+}
+
+.scoreboard p {
+  font-size: 3rem;
 }
 
 
