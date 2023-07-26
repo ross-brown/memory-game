@@ -118,6 +118,7 @@ function handleCardClick(evt) {
       resetCardsAndUnlockBoard();
 
       if (matches === cards.length / 2) { //if all cards matched
+        playSound('win');
         swal({
           title: 'Nice work!',
           text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
@@ -126,6 +127,8 @@ function handleCardClick(evt) {
         updateLocalStorage(guesses, Number(timer.innerText));
         resetBtn.disabled = false;
         clearInterval(currentInterval);
+      } else {
+        playSound('match');
       }
 
     } else { //if cards don't match
@@ -227,6 +230,14 @@ function updateFastTime() {
 }
 
 
+function playSound(event) {
+  const src = (event === 'win' ?
+    './assets/sounds/success_bell-6776.mp3' :
+    './assets/sounds/correct-156911.mp3');
+  const sound = new Audio(src);
+  sound.volume = 0.65;
+  sound.play();
+}
 
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
