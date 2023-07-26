@@ -101,6 +101,7 @@ function unFlipCard(card) {
 
 function handleCardClick(evt) {
   if (boardLocked || evt.target === firstCard) return;
+
   if (firstCard) { //first card already flipped
     secondCard = evt.target;
     flipCard(secondCard);
@@ -117,6 +118,8 @@ function handleCardClick(evt) {
         updateLocalStorage(guesses);
         resetBtn.disabled = false;
       }
+      firstCard.removeEventListener('click', handleCardClick);
+      secondCard.removeEventListener('click', handleCardClick);
       resetCardsAndUnlockBoard();
     } else { //if cards don't match
       currentTimeout = setTimeout(() => {
