@@ -52,9 +52,9 @@ function changeCardAmount(evt) {
 
   COLORS.length = 0;
   const cardAmount = Number(evt.target.value);
-
   addRandomColors(COLORS, cardAmount);
   shuffle(COLORS);
+
   createCards(COLORS);
   cards = document.querySelectorAll('.card');
 }
@@ -76,8 +76,6 @@ function addRandomColors(array, cardAmount) {
  */
 
 function createCards(colors) {
-  const gameBoard = document.getElementById("game");
-
   for (let color of colors) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add(color, 'card');
@@ -107,8 +105,13 @@ function handleCardClick(evt) {
     flipCard(secondCardFlipped);
     boardLocked = true;
     guesses++;
+
     if (cardsAreMatch(firstCardFlipped, secondCardFlipped)) {
       matches++;
+      firstCardFlipped.removeEventListener('click', handleCardClick);
+      secondCardFlipped.removeEventListener('click', handleCardClick);
+      resetCardsAndUnlockBoard();
+
       if (matches === cards.length / 2) { //if all cards matched
         swal({
           title: 'Nice work!',
@@ -118,18 +121,17 @@ function handleCardClick(evt) {
         updateLocalStorage(guesses);
         resetBtn.disabled = false;
       }
-      firstCardFlipped.removeEventListener('click', handleCardClick);
-      secondCardFlipped.removeEventListener('click', handleCardClick);
-      resetCardsAndUnlockBoard();
+
     } else { //if cards don't match
       currentTimeout = setTimeout(() => {
-        unFlipCard(secondCardFlipped);
         unFlipCard(firstCardFlipped);
+        unFlipCard(secondCardFlipped);
         resetCardsAndUnlockBoard();
       }, FOUND_MATCH_WAIT_MSECS);
     }
+
     guessCount.innerText = String(guesses);
-  } else { // if first card
+  } else {
     firstCardFlipped = evt.target;
     flipCard(firstCardFlipped);
   }
@@ -182,8 +184,8 @@ function reorderCards() {
 
 function updateLocalStorage(score) {
   if (localStorage.getItem("lowestScore")) {
-    const currentScore = localStorage.getItem("lowestScore");
-    if (Number(currentScore) > score) {
+    const currentScore = Number(localStorage.getItem("lowestScore"));
+    if (score < currentScore) {
       localStorage.setItem("lowestScore", score.toString());
     }
   } else {
