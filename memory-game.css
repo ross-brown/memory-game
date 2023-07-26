@@ -144,10 +144,13 @@ button:hover:enabled {
 }
 
 .scoreboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   color: #F0FFFF;
   height: 12rem;
   width: 40rem;
-  padding-top: 3rem;
+  padding-top: 1rem;
 }
 
 .scoreboard p {
@@ -172,6 +175,10 @@ button:hover:enabled {
 
   .card-dropdown {
     font-size: 1.4rem;
+  }
+
+  .scoreboard p {
+    font-size: 2rem;
   }
 }
 

@@ -14,6 +14,7 @@ const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const timer = document.querySelector("#timer");
 const lowScore = document.querySelector("#low-score");
+const fastTime = document.querySelector("#fast-time");
 const selectDropdown = document.querySelector('.card-dropdown');
 const gameBoard = document.getElementById("game");
 const FOUND_MATCH_WAIT_MSECS = 1000;
@@ -26,6 +27,7 @@ const colors = shuffle(COLORS);
 createCards(colors);
 
 updateLowScore();
+updateFastTime();
 
 let cards = document.querySelectorAll('.card');
 
@@ -121,7 +123,7 @@ function handleCardClick(evt) {
           text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
           icon: 'success'
         });
-        updateLocalStorage(guesses);
+        updateLocalStorage(guesses, Number(timer.innerText));
         resetBtn.disabled = false;
         clearInterval(currentInterval);
       }
@@ -199,21 +201,29 @@ function handleTimer(btnId) {
   }
 }
 
-function updateLocalStorage(score) {
-  if (localStorage.getItem("lowestScore")) {
-    const currentScore = Number(localStorage.getItem("lowestScore"));
-    if (score < currentScore) {
-      localStorage.setItem("lowestScore", score.toString());
-    }
-  } else {
+function updateLocalStorage(score, time) {
+  const lowestScore = localStorage.getItem("lowestScore");
+  const fastestTime = localStorage.getItem('fastestTime');
+
+  if (!lowestScore || score < Number(lowestScore)) {
     localStorage.setItem("lowestScore", score.toString());
   }
 
+  if (!fastestTime || time < Number(fastestTime)) {
+    localStorage.setItem("fastestTime", time.toString());
+  }
+
   updateLowScore();
+  updateFastTime();
 }
 
 function updateLowScore() {
-  lowScore.innerText = localStorage.getItem('lowestScore');
+  lowScore.innerText = localStorage.getItem('lowestScore') || "0";
+}
+
+function updateFastTime() {
+
+  fastTime.innerText = localStorage.getItem("fastestTime") || "0";
 }
 
 
