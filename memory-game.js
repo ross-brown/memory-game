@@ -3,8 +3,8 @@
 /** Memory game: find matching pairs of cards and flip both of them. */
 
 let boardLocked = true;
-let firstCard;
-let secondCard;
+let firstCardFlipped;
+let secondCardFlipped;
 let matches = 0;
 let guesses = 0;
 let currentTimeout;
@@ -100,14 +100,14 @@ function unFlipCard(card) {
 /** Handle clicking on a card: this could be first-card or second-card. */
 
 function handleCardClick(evt) {
-  if (boardLocked || evt.target === firstCard) return;
+  if (boardLocked || evt.target === firstCardFlipped) return;
 
-  if (firstCard) { //first card already flipped
-    secondCard = evt.target;
-    flipCard(secondCard);
+  if (firstCardFlipped) {
+    secondCardFlipped = evt.target;
+    flipCard(secondCardFlipped);
     boardLocked = true;
     guesses++;
-    if (cardsAreMatch(firstCard, secondCard)) {
+    if (cardsAreMatch(firstCardFlipped, secondCardFlipped)) {
       matches++;
       if (matches === cards.length / 2) { //if all cards matched
         swal({
@@ -118,26 +118,26 @@ function handleCardClick(evt) {
         updateLocalStorage(guesses);
         resetBtn.disabled = false;
       }
-      firstCard.removeEventListener('click', handleCardClick);
-      secondCard.removeEventListener('click', handleCardClick);
+      firstCardFlipped.removeEventListener('click', handleCardClick);
+      secondCardFlipped.removeEventListener('click', handleCardClick);
       resetCardsAndUnlockBoard();
     } else { //if cards don't match
       currentTimeout = setTimeout(() => {
-        unFlipCard(secondCard);
-        unFlipCard(firstCard);
+        unFlipCard(secondCardFlipped);
+        unFlipCard(firstCardFlipped);
         resetCardsAndUnlockBoard();
       }, FOUND_MATCH_WAIT_MSECS);
     }
     guessCount.innerText = String(guesses);
   } else { // if first card
-    firstCard = evt.target;
-    flipCard(firstCard);
+    firstCardFlipped = evt.target;
+    flipCard(firstCardFlipped);
   }
 }
 
 function resetCardsAndUnlockBoard() {
-  firstCard = undefined;
-  secondCard = undefined;
+  firstCardFlipped = undefined;
+  secondCardFlipped = undefined;
   boardLocked = false;
 }
 
