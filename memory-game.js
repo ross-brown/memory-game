@@ -7,7 +7,7 @@ let firstCard;
 let secondCard;
 let matches = 0;
 let guesses = 0;
-let currentTimout;
+let currentTimeout;
 const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
@@ -119,7 +119,7 @@ function handleCardClick(evt) {
       }
       resetCardsAndUnlockBoard();
     } else { //if cards don't match
-      currentTimout = setTimeout(() => {
+      currentTimeout = setTimeout(() => {
         unFlipCard(secondCard);
         unFlipCard(firstCard);
         resetCardsAndUnlockBoard();
@@ -167,7 +167,7 @@ function resetGame() {
   matches = 0;
   guesses = 0;
   guessCount.innerText = 0;
-  clearTimeout(currentTimout);
+  clearTimeout(currentTimeout);
 }
 
 function reorderCards() {
