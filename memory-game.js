@@ -61,6 +61,12 @@ function changeCardAmount(evt) {
 
   createCards(COLORS);
   cards = document.querySelectorAll('.card');
+
+  if (evt.target.value === '16') {
+    cards.forEach(card => {
+      card.style.height = '22%';
+    });
+  }
 }
 
 
@@ -225,7 +231,6 @@ function updateLowScore() {
 }
 
 function updateFastTime() {
-
   fastTime.innerText = localStorage.getItem("fastestTime") || "0";
 }
 
