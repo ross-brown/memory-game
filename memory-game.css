@@ -103,7 +103,6 @@ button:hover:enabled {
   display: flex;
   align-items: center;
   justify-content: center;
-  perspective: 1000px;
   flex-wrap: wrap;
   align-content: center;
   margin: auto;
