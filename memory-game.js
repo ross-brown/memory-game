@@ -8,9 +8,11 @@ let secondCardFlipped;
 let matches = 0;
 let guesses = 0;
 let currentTimeout;
+let currentInterval;
 const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
+const timer = document.querySelector("#timer");
 const lowScore = document.querySelector("#low-score");
 const selectDropdown = document.querySelector('.card-dropdown');
 const gameBoard = document.getElementById("game");
@@ -105,6 +107,7 @@ function handleCardClick(evt) {
     flipCard(secondCardFlipped);
     boardLocked = true;
     guesses++;
+    guessCount.innerText = String(guesses);
 
     if (cardsAreMatch(firstCardFlipped, secondCardFlipped)) {
       matches++;
@@ -115,11 +118,12 @@ function handleCardClick(evt) {
       if (matches === cards.length / 2) { //if all cards matched
         swal({
           title: 'Nice work!',
-          text: `You got it in ${guesses} guesses!`,
+          text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
           icon: 'success'
         });
         updateLocalStorage(guesses);
         resetBtn.disabled = false;
+        clearInterval(currentInterval);
       }
 
     } else { //if cards don't match
@@ -130,7 +134,6 @@ function handleCardClick(evt) {
       }, FOUND_MATCH_WAIT_MSECS);
     }
 
-    guessCount.innerText = String(guesses);
   } else {
     firstCardFlipped = evt.target;
     flipCard(firstCardFlipped);
@@ -147,7 +150,7 @@ function cardsAreMatch(card1, card2) {
   return card1.classList[0] === card2.classList[0];
 }
 
-function startGame() {
+function startGame(evt) {
   boardLocked = false;
   cards.forEach(card => {
     card.style.backgroundColor = '#F0FFFF';
@@ -156,6 +159,7 @@ function startGame() {
   });
   startBtn.disabled = true;
   selectDropdown.disabled = true;
+  handleTimer(evt.target.id);
 }
 
 function resetGame() {
@@ -173,6 +177,7 @@ function resetGame() {
   guesses = 0;
   guessCount.innerText = 0;
   clearTimeout(currentTimeout);
+  handleTimer();
 }
 
 function reorderCards() {
@@ -180,6 +185,18 @@ function reorderCards() {
     const randomOrder = Math.floor(Math.random() * 12);
     card.style.order = randomOrder;
   });
+}
+
+function handleTimer(btnId) {
+  if (btnId === 'start-btn') {
+    let second = 0;
+    currentInterval = setInterval(() => {
+      second++;
+      timer.innerText = second.toString();
+    }, 1000);
+  } else {
+    timer.innerText = '0';
+  }
 }
 
 function updateLocalStorage(score) {

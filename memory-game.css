@@ -45,11 +45,24 @@ header {
   font-size: 2rem;
 }
 
+.score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+}
+
 div.score span {
   color: #F0FFFF
 }
 
 #guess-count {
+  display: inline-block;
+  font-size: 2.5rem;
+  margin-left: 1.5rem;
+}
+
+#timer {
   display: inline-block;
   font-size: 2.5rem;
   margin-left: 1.5rem;
