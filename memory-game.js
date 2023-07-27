@@ -21,7 +21,6 @@ const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [];
 
 addRandomColors(COLORS, 12);
-
 const colors = shuffle(COLORS);
 
 createCards(colors);
