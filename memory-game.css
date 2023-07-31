@@ -69,6 +69,10 @@ div.score span {
   margin-left: 1.5rem;
 }
 
+#how-to-play {
+  font-size: 1rem;
+}
+
 main {
   display: flex;
   align-items: center;
@@ -137,6 +141,11 @@ button:hover:enabled {
   padding: 0.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
+}
+
+.swal-modal .swal-text {
+  text-align: center;
+  line-height: 1.5rem;
 }
 
 .swal-overlay {

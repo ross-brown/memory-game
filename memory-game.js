@@ -13,6 +13,7 @@ const startBtn = document.querySelector('#start-btn');
 const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const timer = document.querySelector("#timer");
+const howToPlayBtn = document.querySelector("#how-to-play");
 const lowScore = document.querySelector("#low-score");
 const fastTime = document.querySelector("#fast-time");
 const selectDropdown = document.querySelector('.card-dropdown');
@@ -190,6 +191,15 @@ function resetGame() {
   handleTimer();
 }
 
+function showInstructions() {
+  swal({
+    title: 'Welcome to the Memory Game!',
+    text: `Find all the matching pairs of cards by flipping them over two at a time.
+      Choose a difficulty and click start to begin!`,
+    icon: 'info',
+  });
+}
+
 function reorderCards() {
   cards.forEach(card => {
     const randomOrder = Math.floor(Math.random() * 12);
@@ -246,3 +256,4 @@ function playSound(event) {
 startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
 selectDropdown.addEventListener('change', changeCardAmount);
+howToPlayBtn.addEventListener('click', showInstructions);
