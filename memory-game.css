@@ -154,21 +154,26 @@ button:hover:enabled {
 
 .score-container {
   display: flex;
-  width: 60%;
+  width: 50rem;
 }
 
 .scoreboard {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   color: #F0FFFF;
   height: 8rem;
   width: 40rem;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+}
+
+.scoreboard h3 {
+  text-decoration: underline;
 }
 
 .scoreboard p {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 
@@ -191,8 +196,12 @@ button:hover:enabled {
     font-size: 1.4rem;
   }
 
+  .score-container {
+    width: 33rem;
+  }
+
   .scoreboard p {
-    font-size: 1.75rem;
+    font-size: 1rem;
   }
 }
 

@@ -14,8 +14,12 @@ const resetBtn = document.querySelector('#reset-btn');
 const guessCount = document.querySelector('#guess-count');
 const timer = document.querySelector("#timer");
 const howToPlayBtn = document.querySelector("#how-to-play");
-const lowScore = document.querySelector("#low-score");
-const fastTime = document.querySelector("#fast-time");
+const lowScoreEasy = document.querySelector("#low-score-easy");
+const fastTimeEasy = document.querySelector("#fast-time-easy");
+const lowScoreMed = document.querySelector("#low-score-med");
+const fastTimeMed = document.querySelector("#fast-time-med");
+const lowScoreHard = document.querySelector("#low-score-hard");
+const fastTimeHard = document.querySelector("#fast-time-hard");
 const selectDropdown = document.querySelector('.card-dropdown');
 const gameBoard = document.getElementById("game");
 const FOUND_MATCH_WAIT_MSECS = 1000;
@@ -239,11 +243,11 @@ function updateLocalStorage(score, time) {
 }
 
 function updateLowScore() {
-  lowScore.innerText = localStorage.getItem('lowestScore') || "0";
+  lowScoreEasy.innerText = localStorage.getItem('lowestScore') || "0";
 }
 
 function updateFastTime() {
-  fastTime.innerText = localStorage.getItem("fastestTime") || "0";
+  fastTimeEasy.innerText = localStorage.getItem("fastestTime") || "0";
 }
 
 
