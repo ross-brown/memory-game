@@ -176,6 +176,10 @@ button:hover:enabled {
   font-size: 1.5rem;
 }
 
+#reset-scores {
+  font-size: 1rem;
+}
+
 
 
 @media only screen and (max-width: 1040px) {

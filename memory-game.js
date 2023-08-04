@@ -21,6 +21,7 @@ const fastTimeMed = document.querySelector("#fast-time-med");
 const lowScoreHard = document.querySelector("#low-score-hard");
 const fastTimeHard = document.querySelector("#fast-time-hard");
 const selectDropdown = document.querySelector('.card-dropdown');
+const resetScoresBtn = document.querySelector('#reset-scores');
 const gameBoard = document.getElementById("game");
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [];
@@ -316,6 +317,12 @@ function updateFastTime(difficulty) {
   }
 }
 
+function resetScores() {
+  localStorage.clear();
+  updateLowScore();
+  updateFastTime();
+};
+
 
 function playSound(event) {
   const src = (event === 'win' ?
@@ -330,3 +337,4 @@ startBtn.addEventListener('click', startGame);
 resetBtn.addEventListener('click', resetGame);
 selectDropdown.addEventListener('change', changeCardAmount);
 howToPlayBtn.addEventListener('click', showInstructions);
+resetScoresBtn.addEventListener('click', resetScores);
