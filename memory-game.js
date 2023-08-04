@@ -80,7 +80,7 @@ function changeCardAmount(evt) {
 
 function addRandomColors(array, cardAmount) {
   for (let i = 0; i < cardAmount / 2; i++) {
-    let num = Math.floor(Math.random() * 16777215).toString(16);
+    let num = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
     let hexCode = '#' + num;
     array.push(hexCode, hexCode);
   }
