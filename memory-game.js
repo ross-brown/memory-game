@@ -236,7 +236,7 @@ function updateLocalStorage(score, time) {
   if (currentDifficulty === "8") {
     if (!lowestScores) {
       localStorage.setItem("lowestScores", JSON.stringify({ easy: Number(score), medium: 0, hard: 0 }));
-    } else if (score < lowestScores.easy || lowestScores === 0) {
+    } else if (score < lowestScores.easy || lowestScores.easy === 0) {
       localStorage.setItem("lowestScores", JSON.stringify({ ...lowestScores, easy: Number(score) }));
     }
 
@@ -271,28 +271,51 @@ function updateLocalStorage(score, time) {
     } else if (time < fastestTimes.hard || fastestTimes.hard === 0) {
       localStorage.setItem("fastestTimes", JSON.stringify({ ...fastestTimes, hard: Number(time) }));
     }
-
-
   }
 
   updateLowScore();
   updateFastTime();
 }
 
+function setLocalStorageItems(difficulty, score, time) {
+
+  const lowestScores = JSON.parse(localStorage.getItem("lowestScores"));
+  const fastestTimes = JSON.parse(localStorage.getItem("fastestTimes"));
+
+  if (!lowestScores) {
+    const lowestScoresObj = { easy: 0, medium: 0, hard: 0 };
+    lowestScoresObj[difficulty] = Number(score);
+    localStorage.setItem("lowestScores", JSON.stringify(lowestScoresObj));
+  } else if (score < lowestScores[difficulty] || lowestScores[difficulty] === 0) {
+    lowestScores[difficulty] = Number(score);
+    localStorage.setItem("lowestScores", JSON.stringify(lowestScores));
+  }
+
+  if (!fastestTimes) {
+    const fastestTimesObj = { easy: 0, medium: 0, hard: 0 };
+    fastestTimesObj[difficulty] = Number(time);
+    localStorage.setItem("fastestTimes", JSON.stringify(fastestTimesObj));
+  } else if (time < fastestTimes[difficulty] || fastestTimes[difficulty] === 0) {
+    fastestTimes[difficulty] = Number(time);
+    localStorage.setItem("fastestTimes", JSON.stringify(fastestTimes));
+  }
+
+}
+
 function updateLowScore() {
   const lowestScores = JSON.parse(localStorage.getItem("lowestScores"));
 
-    lowScoreEasy.innerText = lowestScores?.easy || "0";
-    lowScoreMed.innerText = lowestScores?.medium || "0";
-    lowScoreHard.innerText = lowestScores?.hard || "0";
+  lowScoreEasy.innerText = lowestScores?.easy || "0";
+  lowScoreMed.innerText = lowestScores?.medium || "0";
+  lowScoreHard.innerText = lowestScores?.hard || "0";
 }
 
 function updateFastTime() {
   const fastestTimes = JSON.parse(localStorage.getItem("fastestTimes"));
 
-    fastTimeEasy.innerText = fastestTimes?.easy || "0";
-    fastTimeMed.innerText = fastestTimes?.medium || "0";
-    fastTimeHard.innerText = fastestTimes?.hard || "0";
+  fastTimeEasy.innerText = fastestTimes?.easy || "0";
+  fastTimeMed.innerText = fastestTimes?.medium || "0";
+  fastTimeHard.innerText = fastestTimes?.hard || "0";
 }
 
 function resetScores() {
