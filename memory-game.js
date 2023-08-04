@@ -21,13 +21,16 @@ const gameBoard = document.getElementById("game");
 const FOUND_MATCH_WAIT_MSECS = 1000;
 const COLORS = [];
 
-addRandomColors(COLORS, 12);
-const colors = shuffle(COLORS);
+function loadGame() {
+  addRandomColors(COLORS, 12);
+  const colors = shuffle(COLORS);
+  createCards(colors);
 
-createCards(colors);
+  updateLowScore();
+  updateFastTime();
+}
 
-updateLowScore();
-updateFastTime();
+loadGame();
 
 let cards = document.querySelectorAll('.card');
 
