@@ -126,36 +126,39 @@ function handleCardClick(evt) {
     guessCount.innerText = String(guesses);
 
     if (cardsAreMatch(firstCardFlipped, secondCardFlipped)) {
-      matches++;
-      firstCardFlipped.removeEventListener('click', handleCardClick);
-      secondCardFlipped.removeEventListener('click', handleCardClick);
-      resetCardsAndUnlockBoard();
-
-      if (matches === cards.length / 2) { //if all cards matched
-        playSound('win');
-        swal({
-          title: 'Nice work!',
-          text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
-          icon: 'success'
-        });
-        resetBtn.disabled = false;
-        clearInterval(currentInterval);
-        updateLocalStorage(guesses, Number(timer.innerText));
-      } else {
-        playSound('match');
-      }
-
-    } else { //if cards don't match
+      handleMatch();
+    } else {
       currentTimeout = setTimeout(() => {
         unFlipCard(firstCardFlipped);
         unFlipCard(secondCardFlipped);
         resetCardsAndUnlockBoard();
       }, FOUND_MATCH_WAIT_MSECS);
     }
-
   } else {
     firstCardFlipped = evt.target;
     flipCard(firstCardFlipped);
+  }
+}
+
+function handleMatch() {
+  matches++;
+  const allCardsMatched = matches === cards.length / 2;
+  firstCardFlipped.removeEventListener('click', handleCardClick);
+  secondCardFlipped.removeEventListener('click', handleCardClick);
+  resetCardsAndUnlockBoard();
+
+  if (allCardsMatched) {
+    playSound('win');
+    swal({
+      title: 'Nice work!',
+      text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
+      icon: 'success'
+    });
+    resetBtn.disabled = false;
+    clearInterval(currentInterval);
+    updateLocalStorage(guesses, Number(timer.innerText));
+  } else {
+    playSound('match');
   }
 }
 
