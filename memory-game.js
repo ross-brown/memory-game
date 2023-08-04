@@ -229,15 +229,7 @@ function handleTimer(btnId) {
 
 // TODO: Refactor and decompose ALL THIS MESS
 function updateLocalStorage(score, time) {
-  const currentDifficulty = selectDropdown.value;
-  let difficulty;
-  if (currentDifficulty === '8') {
-    difficulty = 'easy';
-  } else if (currentDifficulty === '12') {
-    difficulty = 'medium';
-  } else {
-    difficulty = 'hard';
-  };
+  const difficulty = setDifficulty();
 
   const lowestScores = JSON.parse(localStorage.getItem("lowestScores"));
   const fastestTimes = JSON.parse(localStorage.getItem("fastestTimes"));
@@ -262,6 +254,13 @@ function updateLocalStorage(score, time) {
 
   updateLowScore();
   updateFastTime();
+}
+
+function setDifficulty() {
+  const currentDifficulty = selectDropdown.value;
+  if (currentDifficulty === '8') return 'easy';
+  if (currentDifficulty === '12') return 'medium';
+  if (currentDifficulty === '16') return 'hard';
 }
 
 function updateLowScore() {
