@@ -318,9 +318,11 @@ function updateFastTime(difficulty) {
 }
 
 function resetScores() {
-  localStorage.clear();
-  updateLowScore();
-  updateFastTime();
+  if (confirm("Are you sure you want to reset the scores?")) {
+    localStorage.clear();
+    updateLowScore();
+    updateFastTime();
+  }
 };
 
 
