@@ -80,8 +80,8 @@ function changeCardAmount(evt) {
 
 function addRandomColors(array, cardAmount) {
   for (let i = 0; i < cardAmount / 2; i++) {
-    let num = (Math.random() * 0xfffff * 1000000).toString(16);
-    let hexCode = '#' + num.slice(0, 6);
+    let num = Math.floor(Math.random() * 16777215).toString(16);
+    let hexCode = '#' + num;
     array.push(hexCode, hexCode);
   }
 }
@@ -227,7 +227,6 @@ function handleTimer(btnId) {
   }
 }
 
-// TODO: Refactor and decompose ALL THIS MESS
 function updateLocalStorage(score, time) {
   const difficulty = setDifficulty();
 
