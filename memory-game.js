@@ -151,7 +151,8 @@ function handleMatch() {
     playSound('win');
     swal({
       title: 'Nice work!',
-      text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!`,
+      text: `You got it in ${guesses} guesses and ${timer.innerText} seconds!
+              Click "Reset Game" to play again!`,
       icon: 'success'
     });
     resetBtn.disabled = false;
