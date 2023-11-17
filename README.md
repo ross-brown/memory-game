@@ -21,3 +21,4 @@ A good exercise in thinking logically about the flow of a game. Having to keep t
 ## Screenshots
 
 <img src="assets/screenshot-memory7.png" alt="memory-game" width="500"/>
+<img src="assets/lighthouse.png" alt="lighthouse-metrics" width="500"/>
