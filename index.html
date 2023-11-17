@@ -3,6 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A card memory game with levels of difficulty">
   <title>Memory Game!</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +28,7 @@
     <div id="game"></div>
     <div class="buttons">
       <button id="start-btn">Start Game</button>
-      <select class="card-dropdown">
+      <select class="card-dropdown" aria-label="difficulty">
         <option value="8">Easy</option>
         <option value="12" selected>Medium</option>
         <option value="16">Hard</option>
@@ -36,17 +38,17 @@
   </main>
   <div class="score-container">
     <div class="scoreboard">
-      <h3>Easy:</h3>
+      <h2>Easy:</h2>
       <p>Lowest Score: <span id="low-score-easy">0</span></p>
       <p>Fastest Time: <span id="fast-time-easy">0</span> sec</p>
     </div>
     <div class="scoreboard">
-      <h3>Medium:</h3>
+      <h2>Medium:</h2>
       <p>Lowest Score: <span id="low-score-med">0</span></p>
       <p>Fastest Time: <span id="fast-time-med">0</span> sec</p>
     </div>
     <div class="scoreboard">
-      <h3>Hard:</h3>
+      <h2>Hard:</h2>
       <p>Lowest Score: <span id="low-score-hard">0</span></p>
       <p>Fastest Time: <span id="fast-time-hard">0</span> sec</p>
     </div>
@@ -54,9 +56,12 @@
   <button id="reset-scores">Reset Scores</button>
   <footer>
     <span>&copy; Ross Brown 2023</span>
-    <a class="social-icon" href="https://www.linkedin.com/in/ross-brown-/"><i
-        class="fa-brands fa-linkedin fa-xl"></i></a>
-    <a class="social-icon" href="https://github.com/ross-brown"><i class="fa-brands fa-github fa-xl"></i></a>
+    <a class="social-icon" href="https://www.linkedin.com/in/ross-brown-/" aria-label="Go to Ross's LinkedIn page">
+      <i class="fa-brands fa-linkedin fa-xl"></i>
+    </a>
+    <a class="social-icon" href="https://github.com/ross-brown" aria-label="Go to Ross's GitHub page">
+      <i class="fa-brands fa-github fa-xl"></i>
+    </a>
   </footer>
 
   <script src="memory-game.js"></script>

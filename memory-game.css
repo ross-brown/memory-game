@@ -168,7 +168,7 @@ button:hover:enabled {
   padding-right: 1rem;
 }
 
-.scoreboard h3 {
+.scoreboard h2 {
   text-decoration: underline;
 }
 
@@ -215,6 +215,7 @@ footer {
   padding: 1rem;
   margin-top: 1rem;
   background-color: #226987;
+  color: #F0FFFF;
 }
 
 .social-icon {
